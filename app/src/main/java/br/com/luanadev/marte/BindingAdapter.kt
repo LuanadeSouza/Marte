@@ -5,10 +5,13 @@ import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import br.com.luanadev.marte.network.MarsProperty
+import br.com.luanadev.marte.overview.MarsApiStatus
+import br.com.luanadev.marte.overview.PhotoGridAdapter
 import coil.load
 
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<MarsPhoto>?) {
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<MarsProperty>?) {
     val adapter = recyclerView.adapter as PhotoGridAdapter
     adapter.submitList(data)
 }
