@@ -15,18 +15,32 @@ class OverviewFragment : Fragment() {
         ViewModelProvider(this).get(OverviewViewModel::class.java)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val binding = FragmentOverviewBinding.inflate(inflater)
+
+        // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner = this
+
+        // Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel
-        binding.photosGrid.adapter = PhotoGridAdapter(PhotoGridAdapter.OnClickListener {
+
+        // Sets the adapter of the photosGrid RecyclerView with clickHandler lambda that
+        // tells the viewModel when our property is clicked
+        binding.photosGrid.adapter = OverviewAdapter(OverviewAdapter.OnClickListener {
             viewModel.displayPropertyDetails(it)
         })
 
-        viewModel.navigateToSelected.observe(viewLifecycleOwner,  {
-            if ( null != it ) {
+        // Observe the navigateToSelectedProperty LiveData and Navigate when it isn't null
+        // After navigating, call displayPropertyDetailsComplete() so that the ViewModel is ready
+        // for another navigation event.
+        viewModel.navigateToSelectedProperty.observe(viewLifecycleOwner, {
+            if (null != it) {
+                // Must find the NavController from the Fragment
                 this.findNavController().navigate(OverviewFragmentDirections.actionShowDetail(it))
+                // Tell the ViewModel we've made the navigate call to prevent multiple navigation
                 viewModel.displayPropertyDetailsComplete()
             }
         })
@@ -51,4 +65,3 @@ class OverviewFragment : Fragment() {
         return true
     }
 }
-

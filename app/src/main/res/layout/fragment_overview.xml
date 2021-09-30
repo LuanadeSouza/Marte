@@ -11,8 +11,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.example.android.marsrealestate.MainActivity">
+        android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/photos_grid"
@@ -28,7 +27,7 @@
             app:listData="@{viewModel.properties}"
             app:spanCount="2"
             tools:itemCount="16"
-            tools:listitem="@layout/grid_view_item" />
+            tools:listitem="@layout/mars_property_item" />
 
         <ImageView
             android:id="@+id/status_image"

@@ -1,37 +1,46 @@
 package br.com.luanadev.marte.ui.detail
 
 import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import br.com.luanadev.marte.R
-import br.com.luanadev.marte.database.MarsEntities
+import br.com.luanadev.marte.network.MarsProperty
 
-class DetailViewModel(mars: MarsEntities,
-                      app: Application) : AndroidViewModel(app) {
+class DetailViewModel(
+    marsProperty: MarsProperty,
+    app: Application
+) : AndroidViewModel(app) {
 
-    private val _selectedProperty = MutableLiveData<MarsEntities>()
-    val selected: LiveData<MarsEntities>
+    private val _selectedProperty = MutableLiveData<MarsProperty>()
+
+    val selectedProperty: LiveData<MarsProperty>
         get() = _selectedProperty
 
-
     init {
-        _selectedProperty.value = mars
+        _selectedProperty.value = marsProperty
     }
 
-    val displayPropertyPrice = Transformations.map(selected) {
+    val displayPropertyPrice = Transformations.map(selectedProperty) {
         app.applicationContext.getString(
             when (it.isRental) {
                 true -> R.string.display_price_monthly_rental
                 false -> R.string.display_price
-            }, it.price)
+            }, it.price
+        )
     }
 
-    val displayPropertyType = Transformations.map(selected) {
-        app.applicationContext.getString(R.string.display_type,
+    val displayPropertyType = Transformations.map(selectedProperty) {
+        app.applicationContext.getString(
+            R.string.display_type,
             app.applicationContext.getString(
-                when(it.isRental) {
+                when (it.isRental) {
                     true -> R.string.type_rent
                     false -> R.string.type_sale
-                }))
+                }
+            )
+        )
     }
-
 }
+

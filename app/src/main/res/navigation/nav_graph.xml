@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_detail">
         <argument
             android:name="selectedProperty"
-            app:argType="br.com.luanadev.marte.database.MarsEntities"
+            app:argType="br.com.luanadev.marte.network.MarsProperty"
             />
     </fragment>
 
