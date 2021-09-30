@@ -1,6 +1,6 @@
 package br.com.luanadev.marte.network
 
-import br.com.luanadev.marte.database.MarsPropertyEntities
+import br.com.luanadev.marte.database.MarsEntities
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
@@ -14,7 +14,7 @@ enum class MarsApiFilter(val value: String) {
 
 interface MarsApiService {
     @GET("realestate")
-    suspend fun getProperties(@Query("filter") type: String): List<MarsPropertyEntities>
+    suspend fun getProperties(@Query("filter") type: String): List<MarsEntities>
 }
 
 private const val BASE_URL = "https://android-kotlin-fun-mars-server.appspot.com/"
