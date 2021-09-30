@@ -1,4 +1,4 @@
-package br.com.luanadev.marte.overview
+package br.com.luanadev.marte.ui.overview
 
 import android.os.Bundle
 import android.view.*
@@ -25,7 +25,7 @@ class OverviewFragment : Fragment() {
             viewModel.displayPropertyDetails(it)
         })
 
-        viewModel.navigateToSelectedProperty.observe(viewLifecycleOwner, Observer {
+        viewModel.navigateToSelectedProperty.observe(viewLifecycleOwner,  {
             if ( null != it ) {
                 this.findNavController().navigate(OverviewFragmentDirections.actionShowDetail(it))
                 viewModel.displayPropertyDetailsComplete()

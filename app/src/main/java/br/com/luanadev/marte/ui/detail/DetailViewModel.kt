@@ -1,19 +1,18 @@
-package br.com.luanadev.marte.detail
+package br.com.luanadev.marte.ui.detail
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.*
 import br.com.luanadev.marte.R
-import br.com.luanadev.marte.network.MarsProperty
+import br.com.luanadev.marte.database.MarsPropertyEntities
+import br.com.luanadev.marte.repository.MarsRepository
 
-class DetailViewModel( marsProperty: MarsProperty,
-                       app: Application) : AndroidViewModel(app) {
+class DetailViewModel(marsProperty: MarsPropertyEntities,
+                      app: Application) : AndroidViewModel(app) {
 
-    private val _selectedProperty = MutableLiveData<MarsProperty>()
-    val selectedProperty: LiveData<MarsProperty>
+    private val _selectedProperty = MutableLiveData<MarsPropertyEntities>()
+    val selectedProperty: LiveData<MarsPropertyEntities>
         get() = _selectedProperty
+
 
     init {
         _selectedProperty.value = marsProperty
@@ -35,4 +34,5 @@ class DetailViewModel( marsProperty: MarsProperty,
                     false -> R.string.type_sale
                 }))
     }
+
 }

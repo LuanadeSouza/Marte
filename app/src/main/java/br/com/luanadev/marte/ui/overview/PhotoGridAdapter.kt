@@ -1,4 +1,4 @@
-package br.com.luanadev.marte.overview
+package br.com.luanadev.marte.ui.overview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,26 +6,26 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.luanadev.marte.databinding.GridViewItemBinding
-import br.com.luanadev.marte.network.MarsProperty
+import br.com.luanadev.marte.database.MarsPropertyEntities
 
 class PhotoGridAdapter( private val onClickListener: OnClickListener ) :
-    ListAdapter<MarsProperty,
+    ListAdapter<MarsPropertyEntities,
             PhotoGridAdapter.MarsPropertyViewHolder>(DiffCallback) {
 
     class MarsPropertyViewHolder(private var binding: GridViewItemBinding):
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(marsProperty: MarsProperty) {
+        fun bind(marsProperty: MarsPropertyEntities) {
             binding.property = marsProperty
             binding.executePendingBindings()
         }
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<MarsProperty>() {
-        override fun areItemsTheSame(oldItem: MarsProperty, newItem: MarsProperty): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<MarsPropertyEntities>() {
+        override fun areItemsTheSame(oldItem: MarsPropertyEntities, newItem: MarsPropertyEntities): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: MarsProperty, newItem: MarsProperty): Boolean {
+        override fun areContentsTheSame(oldItem: MarsPropertyEntities, newItem: MarsPropertyEntities): Boolean {
             return oldItem.id == newItem.id
         }
     }
@@ -43,8 +43,8 @@ class PhotoGridAdapter( private val onClickListener: OnClickListener ) :
         holder.bind(marsProperty)
     }
 
-    class OnClickListener(val clickListener: (marsProperty:MarsProperty) -> Unit) {
-        fun onClick(marsProperty:MarsProperty) = clickListener(marsProperty)
+    class OnClickListener(val clickListener: (marsProperty: MarsPropertyEntities) -> Unit) {
+        fun onClick(marsProperty: MarsPropertyEntities) = clickListener(marsProperty)
     }
 }
 
