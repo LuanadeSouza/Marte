@@ -5,7 +5,7 @@
         <import type="android.view.View"/>
         <variable
             name="property"
-            type="br.com.luanadev.marte.database.MarsPropertyEntities" />
+            type="br.com.luanadev.marte.database.MarsEntities" />
     </data>
     <FrameLayout
         android:layout_width="match_parent"

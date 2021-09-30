@@ -1,18 +1,19 @@
-package br.com.luanadev.marte
+package br.com.luanadev.marte.util
 
 import android.view.View
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import br.com.luanadev.marte.database.MarsPropertyEntities
+import br.com.luanadev.marte.R
+import br.com.luanadev.marte.database.MarsEntities
 import br.com.luanadev.marte.ui.overview.MarsApiStatus
 import br.com.luanadev.marte.ui.overview.PhotoGridAdapter
 import coil.load
 import com.bumptech.glide.Glide
 
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<MarsPropertyEntities>?) {
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<MarsEntities>?) {
     val adapter = recyclerView.adapter as PhotoGridAdapter
     adapter.submitList(data)
 }

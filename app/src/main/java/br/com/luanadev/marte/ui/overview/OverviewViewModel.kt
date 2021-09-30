@@ -1,11 +1,13 @@
 package br.com.luanadev.marte.ui.overview
 
 import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import br.com.luanadev.marte.database.MarsDatabase.Companion.getDatabase
-import br.com.luanadev.marte.network.MarsApi
+import br.com.luanadev.marte.database.MarsEntities
 import br.com.luanadev.marte.network.MarsApiFilter
-import br.com.luanadev.marte.database.MarsPropertyEntities
 import br.com.luanadev.marte.repository.MarsRepository
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -22,13 +24,13 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
     val status: LiveData<MarsApiStatus>
         get() = _status
 
-    private val _properties = MutableLiveData<List<MarsPropertyEntities>>()
+    private val _properties = MutableLiveData<List<MarsEntities>>()
 
-    val properties: LiveData<List<MarsPropertyEntities>>
+    val properties: LiveData<List<MarsEntities>>
         get() = _properties
 
-    private val _navigateToSelectedProperty = MutableLiveData<MarsPropertyEntities>()
-    val navigateToSelectedProperty: LiveData<MarsPropertyEntities>
+    private val _navigateToSelectedProperty = MutableLiveData<MarsEntities>()
+    val navigateToSelected: LiveData<MarsEntities>
         get() = _navigateToSelectedProperty
 
     private var _eventNetworkError = MutableLiveData(false)
@@ -49,7 +51,7 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
         viewModelScope.launch {
             _status.value = MarsApiStatus.LOADING
             try {
-                _properties.value = MarsApi.retrofitService.getProperties(filter.value)
+                marsRepository.refreshMarsProperties()
                 _status.value = MarsApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = MarsApiStatus.ERROR
@@ -62,8 +64,8 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
         getMarsRealEstateProperties(filter)
     }
 
-    fun displayPropertyDetails(marsProperty: MarsPropertyEntities) {
-        _navigateToSelectedProperty.value = marsProperty
+    fun displayPropertyDetails(mars: MarsEntities) {
+        _navigateToSelectedProperty.value = mars
     }
 
     fun displayPropertyDetailsComplete() {

@@ -6,26 +6,26 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.luanadev.marte.databinding.GridViewItemBinding
-import br.com.luanadev.marte.database.MarsPropertyEntities
+import br.com.luanadev.marte.database.MarsEntities
 
 class PhotoGridAdapter( private val onClickListener: OnClickListener ) :
-    ListAdapter<MarsPropertyEntities,
+    ListAdapter<MarsEntities,
             PhotoGridAdapter.MarsPropertyViewHolder>(DiffCallback) {
 
     class MarsPropertyViewHolder(private var binding: GridViewItemBinding):
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(marsProperty: MarsPropertyEntities) {
-            binding.property = marsProperty
+        fun bind(mars: MarsEntities) {
+            binding.property = mars
             binding.executePendingBindings()
         }
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<MarsPropertyEntities>() {
-        override fun areItemsTheSame(oldItem: MarsPropertyEntities, newItem: MarsPropertyEntities): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<MarsEntities>() {
+        override fun areItemsTheSame(oldItem: MarsEntities, newItem: MarsEntities): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: MarsPropertyEntities, newItem: MarsPropertyEntities): Boolean {
+        override fun areContentsTheSame(oldItem: MarsEntities, newItem: MarsEntities): Boolean {
             return oldItem.id == newItem.id
         }
     }
@@ -43,8 +43,8 @@ class PhotoGridAdapter( private val onClickListener: OnClickListener ) :
         holder.bind(marsProperty)
     }
 
-    class OnClickListener(val clickListener: (marsProperty: MarsPropertyEntities) -> Unit) {
-        fun onClick(marsProperty: MarsPropertyEntities) = clickListener(marsProperty)
+    class OnClickListener(val clickListener: (mars: MarsEntities) -> Unit) {
+        fun onClick(mars: MarsEntities) = clickListener(mars)
     }
 }
 

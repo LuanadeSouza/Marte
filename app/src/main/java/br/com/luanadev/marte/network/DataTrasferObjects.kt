@@ -1,6 +1,6 @@
 package br.com.luanadev.marte.network
 
-import br.com.luanadev.marte.database.MarsPropertyEntities
+import br.com.luanadev.marte.database.MarsEntities
 import br.com.luanadev.marte.domain.MarsModels
 import com.squareup.moshi.JsonClass
 
@@ -8,7 +8,7 @@ import com.squareup.moshi.JsonClass
 data class NetworkMarsContainer(val marsProperties: List<NetworkMarsProperties>)
 
 /**
- * Videos represent a devbyte that can be played.
+ * MarsProperties represent a devbyte that can be played.
  */
 @JsonClass(generateAdapter = true)
 data class NetworkMarsProperties(
@@ -21,9 +21,9 @@ data class NetworkMarsProperties(
 /**
  * Convert Network results to database objects
  */
-fun NetworkMarsContainer.asDomainModel(): List<MarsPropertyEntities> {
+fun NetworkMarsContainer.asDomainModel(): List<MarsModels> {
     return marsProperties.map {
-        MarsPropertyEntities(
+        MarsModels(
             id = it.id,
             type = it.type,
             imgSrcUrl = it.imgSrcUrl,
@@ -35,9 +35,9 @@ fun NetworkMarsContainer.asDomainModel(): List<MarsPropertyEntities> {
 /**
  * Convert Network results to database objects
  */
-fun NetworkMarsContainer.asDatabaseModel(): List<MarsPropertyEntities> {
+fun NetworkMarsContainer.asDatabaseModel(): List<MarsEntities> {
     return marsProperties.map {
-        MarsPropertyEntities(
+        MarsEntities(
             id = it.id,
             type = it.type,
             imgSrcUrl = it.imgSrcUrl,

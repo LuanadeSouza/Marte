@@ -9,7 +9,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @Entity
-data class MarsPropertyEntities constructor(
+data class MarsEntities constructor(
     @PrimaryKey
     val id: String,
     // used to map img_src from the JSON to imgSrcUrl in our class
@@ -24,7 +24,7 @@ data class MarsPropertyEntities constructor(
 /**
  * Map MarsPropertyEntities to domain entities
  */
-fun List<MarsPropertyEntities>.asDomainModel(): List<MarsModels> {
+fun List<MarsEntities>.asDomainModel(): List<MarsModels> {
     return map {
         MarsModels(
             id = it.id,

@@ -3,7 +3,6 @@ package br.com.luanadev.marte.ui.overview
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import br.com.luanadev.marte.R
@@ -25,7 +24,7 @@ class OverviewFragment : Fragment() {
             viewModel.displayPropertyDetails(it)
         })
 
-        viewModel.navigateToSelectedProperty.observe(viewLifecycleOwner,  {
+        viewModel.navigateToSelected.observe(viewLifecycleOwner,  {
             if ( null != it ) {
                 this.findNavController().navigate(OverviewFragmentDirections.actionShowDetail(it))
                 viewModel.displayPropertyDetailsComplete()

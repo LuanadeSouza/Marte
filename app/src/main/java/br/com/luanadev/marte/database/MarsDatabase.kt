@@ -5,7 +5,7 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 
-@Database(entities = [MarsPropertyEntities::class], version = 1)
+@Database(entities = [MarsEntities::class], version = 1, exportSchema = false)
 abstract class MarsDatabase : RoomDatabase() {
 
     companion object {
@@ -26,5 +26,5 @@ abstract class MarsDatabase : RoomDatabase() {
         }
     }
 
-    abstract val marsDao: MarsDao
+    abstract fun marsDao(): MarsDao
 }

@@ -7,9 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import br.com.luanadev.marte.databinding.FragmentDetailBinding
-import br.com.luanadev.marte.detail.DetailViewModelFactory
-import br.com.luanadev.marte.ui.detail.DetailFragmentArgs
-import br.com.luanadev.marte.ui.detail.DetailViewModel
 
 class DetailFragment : Fragment() {
     override fun onCreateView(
