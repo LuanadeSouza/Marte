@@ -18,7 +18,6 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<MarsProperty>?) {
     adapter.submitList(data)
 }
 
-
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
     imgUrl?.let {
