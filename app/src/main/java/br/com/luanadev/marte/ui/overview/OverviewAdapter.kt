@@ -16,8 +16,6 @@ class OverviewAdapter(private val onClickListener: OnClickListener) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(marsPropertyProperty: MarsProperty) {
             binding.property = marsPropertyProperty
-            // This is important, because it forces the data binding to execute immediately,
-            // which allows the RecyclerView to make the correct view size measurements
             binding.executePendingBindings()
         }
     }
@@ -33,8 +31,7 @@ class OverviewAdapter(private val onClickListener: OnClickListener) :
     }
 
     override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
+        parent: ViewGroup, viewType: Int
     ): OverviewViewHolder {
         return OverviewViewHolder(MarsPropertyItemBinding.inflate(LayoutInflater.from(parent.context)))
     }

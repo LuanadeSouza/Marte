@@ -22,8 +22,3 @@ interface MarsApiService {
     @GET("realestate")
     suspend fun getProperties(@Query("filter") type: String): List<MarsProperty>
 }
-
-
-
-
-
